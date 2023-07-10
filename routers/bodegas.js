@@ -21,7 +21,21 @@ appBodegas.get("/", (req, res)=>{
         `SELECT * FROM bodegas ORDER BY nombre`,
         (err, data, fils)=>{
             res.send(data);
-            console.log(data);
+        }
+    )
+});
+/**
+ * ! METODO POST DEL CRUD.
+ */
+appBodegas.post("/", (req, res)=>{
+    conection.query(
+        /*sql*/`INSERT INTO bodegas SET ?`,
+        req.body,
+        (err, data, fils)=>{
+            data.affectedRows +=200;
+            let resultado = req.body;
+            resultado.id=data.insertId;
+            res.status(data.affectedRows).send(resultado);
         }
     )
 });
