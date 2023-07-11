@@ -1,18 +1,10 @@
 import {Router} from 'express';
-import mysql from 'mysql2';
+import conection from '../server/conections.js';
 const appBodegas = Router();
-let conection = undefined;
 
-appBodegas.use((req,res,next)=>{
-        conection = mysql.createPool({
-            host: "localhost",
-            user: "campus",
-            password: "campus2023",
-            database: "mibodeguita",
-            port: 3306
-        });
-        next();
-    });
+appBodegas.use((req, res, next)=>{
+    (conection)?next():res.status(500).send("Conexión a la base de datos fallida.");
+});
 /**
  * ! METODO GET DEL CRUD.
  */
