@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import conection from '../server/conections.js';
+import middleWare from "../middleware/wall.js";
 const appBodegas = Router();
 
 appBodegas.use((req, res, next)=>{
@@ -19,7 +20,7 @@ appBodegas.get("/", (req, res)=>{
 /**
  * ! METODO POST DEL CRUD.
  */
-appBodegas.post("/", (req, res)=>{
+appBodegas.post("/",middleWare, (req, res)=>{
     conection.query(
         /*sql*/`INSERT INTO bodegas SET ?`,
         req.body,

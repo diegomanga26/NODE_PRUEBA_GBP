@@ -10,7 +10,6 @@ dotenv.config();
 
 appExpress.use(express.json());
 appExpress.use("/bodegas", appBodegas);
-
 appExpress.use("/productos", appProductos);
 
 let config = JSON.parse(process.env.myConfig);
